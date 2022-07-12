@@ -1,9 +1,9 @@
-from tracemalloc import start
 import pygame, sys
 from pygame.locals import *
 
 from Button import Button
 from game import game
+from startAnimation import startAnimation
 
 clock = pygame.time.Clock()
 pygame.init()
@@ -26,6 +26,7 @@ buttons.add(startBtn, aboutBtn, exitBtn)
 click = False
 
 def main_menu():
+    startAnimation()
     running = True
     while running:
         mouseX, mouseY = pygame.mouse.get_pos()

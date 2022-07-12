@@ -14,6 +14,7 @@ class AnimatedItem(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = [pos_x, pos_y]
 
+
     def getItemImage(self, name):
         self.image = pygame.image.load('./assets/items/'+name+'.png')
 
@@ -37,5 +38,3 @@ class AnimatedItem(pygame.sprite.Sprite):
                 self.isAnimating = False
             else:
                 self.image = self.sprites[int(self.currentSprite)]
-
-

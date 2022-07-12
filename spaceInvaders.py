@@ -2,6 +2,6 @@ import json, os, sys
 import pygame
 from pygame.locals import *
 
-def playing():
+def spaceInvaders():
     running = True
     
