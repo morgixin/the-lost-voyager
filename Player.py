@@ -74,11 +74,17 @@ class Player(pygame.sprite.Sprite):
             self.setDirection("LEFT")
 
         # if self.isWalkingLeft and self.rect.x <= 750 and self.rect.x >= 200:
-        if self.isWalkingLeft:
-            self.rect.x -= self.speed
+        if self.rect.x > 255:
+            if self.isWalkingLeft:
+                self.rect.x -= self.speed
+        else:
+            self.rect.x = 256
         # elif self.isWalkingRight and self.rect.x < 750 and self.rect.x > 200:
-        elif self.isWalkingRight:
-            self.rect.x += self.speed
+        if self.rect.x < 908 - self.rect.width:
+            if self.isWalkingRight:
+                self.rect.x += self.speed
+        else:
+            self.rect.x = 908 - 1 - self.rect.width
 
 
     def animate(self):

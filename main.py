@@ -25,8 +25,9 @@ buttons.add(startBtn, aboutBtn, exitBtn)
 
 click = False
 
+
 def main_menu():
-    startAnimation()
+    # startAnimation()
     running = True
     while running:
         mouseX, mouseY = pygame.mouse.get_pos()
@@ -65,7 +66,7 @@ def main_menu():
                 if event.button == 1:
                     click = True
 
-        screen.fill((0,0,0))
+        screen.fill(0)
         screen.blit(bg, (0,0))
         buttons.draw(screen)
         buttons.update()

@@ -17,23 +17,22 @@ screen = pygame.display.set_mode((screenWidth, screenHeight))
 pygame.display.set_caption("The Lost Voyager")
 icon = pygame.image.load("./assets/img/icon.png")
 pygame.display.set_icon(icon)
-bg = pygame.image.load("./assets/img/nave 5.jpg").convert()
-# bg = pygame.transform.scale(bg, (int(bg.image.get_size[0]*3), int(bg.image.get_size[1]*3)))
+bg = pygame.image.load("./assets/img/nave 5.png")
 
 # Obtenção dos elementos da interface
-# background = GameImage('./assets/img/fundo big.png')
-
 movingSprites = pygame.sprite.Group()
 player = Player(260, 230)
 movingSprites.add(player)
+
 # staticSprites = pygame.sprite.Group()
 # bottle = Item(90, 240, 10, 20)
 # bottle.getItemImage("bottle")
 # staticSprites.add(bottle)
 
-# door = AnimatedItem(104, 512, 736, 0)
-# movingSprites.add(door)
-# keys = window.get_keyboard()
+movingItems = pygame.sprite.Group()
+door = AnimatedItem(104, 512, 736, 0)
+door.getItemImages("door")
+movingItems.add(door)
 
 # Inicializando o controle
 if pygame.joystick.get_count() > 0:
@@ -48,6 +47,7 @@ def game():
     running = True
 
     while running:
+        screen.fill(0)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -64,6 +64,8 @@ def game():
                     emote.setSprite("attention")
                     emote.animate()
                     movingSprites.add(emote)
+                    if player.rect.colliderect(door):
+                        door.animate()
                 if event.key == pygame.K_x:
                     emote = Emote(player.rect.x + player.rect.width/3, player.rect.y - 45)
                     emote.setSprite("zzz")
@@ -104,20 +106,17 @@ def game():
                     else:
                         player.setDirection("NONE")
                 
-            # if player.rect.collidepoint((door.rect.x, door.rect.y)):
-            #     if event.type == pygame.KEYDOWN:
-            #         if event.key == pygame.K_z:
-            #             door.animate()
-
-        
-        
-
-        screen.fill((0,0,0))
-        if player.rect.x < screenWidth-50:
+        if player.rect.x < screenWidth - 50:
             bgX = 250 - player.rect.x-1
+            for item in movingItems:
+                item.rect.x = 250 + 736 - player.rect.x-1
         screen.blit(bg, (bgX, 0))
+        # staticSprites.draw()
         movingSprites.draw(screen)
         movingSprites.update()
+        movingItems.draw(screen)
+        movingItems.update()
+        
 
         # staticSprites.draw(screen)
         pygame.display.flip()

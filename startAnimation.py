@@ -29,11 +29,11 @@ def startAnimation():
         screen.fill(0)
         for event in pygame.event.get():
             if event.type == QUIT:
-                running = False
+                pygame.quit()
             if event.type == pygame.KEYDOWN:
                 running = False
 
-        deltaY -= 0.5
+        deltaY -= 0.8
         shown = []
         posList = []
         i = 0

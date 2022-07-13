@@ -1,3 +1,4 @@
+from re import S
 import pygame
 from pygame.locals import *
 
@@ -11,19 +12,20 @@ class AnimatedItem(pygame.sprite.Sprite):
 
         self.sprites = []
         self.currentSprite = 0
-        self.rect = self.image.get_rect()
-        self.rect.topleft = [pos_x, pos_y]
+        # self.rect = self.image.get_rect()
+        # self.rect.topleft = [pos_x, pos_y]
 
 
-    def getItemImage(self, name):
-        self.image = pygame.image.load('./assets/items/'+name+'.png')
+    def getItemImages(self, name):
+        self.image = pygame.image.load('./assets/items/'+name+'/1.png')
+        self.getSprites(name)
 
 
     def getSprites(self, name):
         url = "./assets/items/"+name+"/"
 
-        for i in range(9):
-            self.sprites.append(pygame.image.load(url+i+".png"))
+        for i in range(1,9):
+            self.sprites.append(pygame.image.load(url+str(i)+".png"))
 
 
     def animate(self):
