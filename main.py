@@ -25,9 +25,8 @@ buttons.add(startBtn, aboutBtn, exitBtn)
 
 click = False
 
-
-def main_menu():
-    # startAnimation()
+def mainmenu():
+    startAnimation()
     running = True
     while running:
         mouseX, mouseY = pygame.mouse.get_pos()
@@ -92,4 +91,4 @@ def options():
         pygame.display.flip()
         clock.tick(60)
 
-main_menu()
+mainmenu()

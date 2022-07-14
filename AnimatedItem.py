@@ -9,11 +9,11 @@ class AnimatedItem(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = [pos_x, pos_y]
         self.isAnimating = False
+        self.endedAnimation = False
+        self.reverseAnimation = False
 
         self.sprites = []
         self.currentSprite = 0
-        # self.rect = self.image.get_rect()
-        # self.rect.topleft = [pos_x, pos_y]
 
 
     def getItemImages(self, name):
@@ -30,13 +30,28 @@ class AnimatedItem(pygame.sprite.Sprite):
 
     def animate(self):
         self.isAnimating = True
-
+        self.endedAnimation = False
+        if self.reverseAnimation:
+            self.currentSprite = len(self.sprites)
 
     def update(self):
         if self.isAnimating:
-            self.currentSprite += 0.1
-            if self.currentSprite >= len(self.sprites):
-                self.currentSprite = 0
-                self.isAnimating = False
+            if not self.reverseAnimation:
+                self.currentSprite += 0.1
+                if self.currentSprite >= len(self.sprites):
+                    self.currentSprite = 0
+                    self.isAnimating = False
+                    self.endedAnimation = True
+                    self.reverseAnimation = True
+                else:
+                    self.image = self.sprites[int(self.currentSprite)]
+                    self.endedAnimation = False
             else:
-                self.image = self.sprites[int(self.currentSprite)]
+                self.currentSprite -= 0.1
+                if self.currentSprite <= 0:
+                    self.isAnimating = False
+                    self.currentSprite = 0
+                    self.reverseAnimation = False
+                else:
+                    self.image = self.sprites[int(self.currentSprite)]
+                    self.endedAnimation = False
