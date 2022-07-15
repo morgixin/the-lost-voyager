@@ -58,7 +58,7 @@ def mainmenu():
                 pygame.quit()
                 sys.exit()
             if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
+                if event.key == K_ESCAPE or K_x:
                     pygame.quit()
                     sys.exit()
             if event.type == MOUSEBUTTONDOWN:
@@ -84,10 +84,10 @@ def options():
                 pygame.quit()
                 sys.exit()
             if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
+                if event.key == K_ESCAPE or K_x:
                     running = False
 
-        screen.blit(about, (234, 160))
+        screen.blit(about, (234, 150))
         pygame.display.flip()
         clock.tick(60)
 
