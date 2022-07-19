@@ -64,6 +64,9 @@ class Player(pygame.sprite.Sprite):
             self.isWalkingLeft = False
             self.isWalkingRight = True
         
+    def setSpeed(self, speed):
+        self.speed = speed
+
 
     def getInput(self):
         keys = pygame.key.get_pressed()

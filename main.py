@@ -1,4 +1,5 @@
-import pygame, sys
+import pygame
+import sys
 from pygame.locals import *
 
 from Button import Button
@@ -24,6 +25,7 @@ exitBtn = Button(90, 268, "sair")
 buttons.add(startBtn, aboutBtn, exitBtn)
 
 click = False
+
 
 def mainmenu():
     startAnimation()
@@ -66,7 +68,7 @@ def mainmenu():
                     click = True
 
         screen.fill(0)
-        screen.blit(bg, (0,0))
+        screen.blit(bg, (0, 0))
         buttons.draw(screen)
         buttons.update()
         pygame.display.flip()
@@ -90,5 +92,6 @@ def options():
         screen.blit(about, (234, 150))
         pygame.display.flip()
         clock.tick(60)
+
 
 mainmenu()

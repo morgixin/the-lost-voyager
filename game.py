@@ -9,6 +9,7 @@ from Text import TextBox
 from AnimatedItem import AnimatedItem
 from earthAnimation import displayEarthExplosion
 from spaceInvaders import main_menu
+from startAnimation import startStory
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -54,7 +55,6 @@ def fade():
         pygame.display.update()
         pygame.time.delay(5)
 
-
 def checkCollision(days):
     # checa se o jogador esta colidindo com 
     # os elementos interativos na tela
@@ -68,7 +68,7 @@ def checkCollision(days):
         textLabels.append(playSI)
     if 250 <= int(player.rect.x) <= 255:
         if days < 3: # area da janela
-            windowMsg = TextBox("A Terra é linda daqui", "T")
+            windowMsg = TextBox("Gagarin estava certo, a Terra é definitivamente azul.", "T")
             textLabels.append(windowMsg)
         else:
             windowMsg = TextBox("A Terra é tao... QUE?", "A")
@@ -92,6 +92,7 @@ def game():
     days = 0
     running = True
     awaitConfirm = False
+    startStory()
     while running:
         screen.fill(0)
         for event in pygame.event.get():
@@ -116,13 +117,17 @@ def game():
                     awaitConfirm = True
                 if event.key == pygame.K_x:
                     awaitConfirm = False
-                elif event.key == pygame.K_ESCAPE:
+                if event.key == pygame.K_LSHIFT:
+                    player.setSpeed(2)
+                if event.key == pygame.K_ESCAPE:
                     if warnings == [] and not awaitConfirm:
                         warning = Warning("Deseja sair do jogo?")
                         warnings.append(warning)
                         awaitConfirm = True
             if event.type == pygame.KEYUP:
                 player.setDirection("NONE")
+                if event.key == pygame.K_LSHIFT:
+                    player.setSpeed(1)
                 # click = False
             # lida com as setas do controle
             if event.type == pygame.JOYBUTTONDOWN:
@@ -188,6 +193,11 @@ def game():
                 days += 1
                 fade()
                 textLabels[0].confirm = False
+                textLabels.clear()
+                windowMsg = TextBox("Mais um dia, mais perto de Marte", "T")
+                textLabels.append(windowMsg)
+                awaitConfirm = True
+
 
         if player.rect.x < screenWidth - 50:
             bgX = 250 - player.rect.x-1
