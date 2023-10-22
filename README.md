@@ -1,3 +1,5 @@
+<img src="https://img.itch.zone/aW1nLzk0NTQzNDQucG5n/315x250%23c/NO3YNC.png" height='80px'>
+
 # the-lost-voyager
 A pygame game about an astronaut and his last journey to space.
 
